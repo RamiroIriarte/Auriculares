@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <Stock>
+    <Marca>ss</Marca>
+    <Caracteristicas>12</Caracteristicas>
+    <Codigo>12</Codigo>
+    <Fecha_x0020_de_x0020_Fabricacion>2/5/2023 21:04:10</Fecha_x0020_de_x0020_Fabricacion>
+    <Precio_x0020_Individual>12</Precio_x0020_Individual>
+    <Cantidad>3</Cantidad>
+  </Stock>
+  <Stock>
+    <Marca>qwqw</Marca>
+    <Caracteristicas>qwqwqw</Caracteristicas>
+    <Codigo>12121</Codigo>
+    <Fecha_x0020_de_x0020_Fabricacion>12/6/2023 12:02:49</Fecha_x0020_de_x0020_Fabricacion>
+    <Precio_x0020_Individual>12121</Precio_x0020_Individual>
+    <Cantidad>4</Cantidad>
+  </Stock>
+  <Stock>
+    <Marca>qwqwe</Marca>
+    <Caracteristicas>qweqwe</Caracteristicas>
+    <Codigo>12333</Codigo>
+    <Fecha_x0020_de_x0020_Fabricacion>22/2/2023 12:02:49</Fecha_x0020_de_x0020_Fabricacion>
+    <Precio_x0020_Individual>12333</Precio_x0020_Individual>
+    <Cantidad>2</Cantidad>
+  </Stock>
+</DocumentElement>
