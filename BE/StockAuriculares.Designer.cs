@@ -1,4 +1,4 @@
-﻿namespace BE
+﻿namespace Front
 {
     partial class StockAuriculares
     {

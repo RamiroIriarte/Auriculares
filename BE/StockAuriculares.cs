@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FE;
+using Back;
 
-namespace BE
+namespace Front
 {
     public partial class StockAuriculares : Form
     {

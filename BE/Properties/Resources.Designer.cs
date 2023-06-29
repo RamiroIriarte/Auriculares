@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BE.Properties
+namespace Front.Properties
 {
 
 
