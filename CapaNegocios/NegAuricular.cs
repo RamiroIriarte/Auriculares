@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CapaNegocios
 {
-    internal class NegAuricular
+    public class NegAuricular
     {
         AdministAuriculares DatosobjAuricular = new AdministAuriculares();
 

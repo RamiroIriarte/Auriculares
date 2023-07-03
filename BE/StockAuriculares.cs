@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Back;
+using CapaNegocios;
 
 namespace Front
 {
@@ -16,22 +17,52 @@ namespace Front
         //Intanciamos un objeto de la clase Auricular, creamos el data table y el archivo xml
 
         Auricular auricular = new Auricular();
-        DataTable dtStock = new DataTable() { TableName = "Stock" };
-        const string DIRECCION_XML = @"C:\Users\Ramiro\source\repos\Auriculares\";
+        NegAuricular objNegAuricular = new NegAuricular();
+        //DataTable dtStock = new DataTable() { TableName = "Stock" };
+        //const string DIRECCION_XML = @"C:\Users\Ramiro\source\repos\Auriculares\";
+
         public StockAuriculares()
         {
             InitializeComponent();
+            CrearDGV();
+            LlenarDGV();
+            
             //Creamos las columnas del data table
-            dtStock.Columns.Add("Marca");
-            dtStock.Columns.Add("Caracteristicas");
-            dtStock.Columns.Add("Codigo");
-            dtStock.Columns.Add("Fecha de Fabricacion");
-            dtStock.Columns.Add("Precio Individual");
-            dtStock.Columns.Add("Cantidad");
+            //dtStock.Columns.Add("Marca");
+            //dtStock.Columns.Add("Caracteristicas");
+            //dtStock.Columns.Add("Codigo");
+            //dtStock.Columns.Add("Fecha de Fabricacion");
+            //dtStock.Columns.Add("Precio Individual");
+            //dtStock.Columns.Add("Cantidad");
 
-            Leer_DT();
-            dgvStock.DataSource = dtStock;  
+            //Leer_DT();
+            //dgvStock.DataSource = dtStock;  
 
+
+        }
+        private void LlenarDGV()
+        {
+            dgvStock.Rows.Clear();
+            DataSet ds = new DataSet();
+            ds = objNegAuricular.listadoAuriculares("Todos");
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    dgvStock.Rows.Add(dr[0].ToString(), dr[1], dr[2], dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
+                }
+            }
+            else
+                MessageBox.Show("No hay Auriculares cargados en el sistema");
+        }
+        private void CrearDGV()
+        {
+            dgvStock.Columns.Add("0", "Codigo");
+            dgvStock.Columns.Add("1", "Marca");
+            dgvStock.Columns.Add("2", "Caracteristicas");
+            dgvStock.Columns.Add("3", "Cantidad");
+            dgvStock.Columns.Add("4", "Precio");
+            dgvStock.Columns.Add("5", "FechaFabricacion");
 
         }
        private void btnCargar_Click(object sender, EventArgs e)
@@ -40,16 +71,19 @@ namespace Front
 
             if (!Validar())
             {
+                int nGrabados = -1;
                 auricular.Marca = txtMarca.Text;
                 auricular.Caracteristicas = txtCaract.Text;
                 auricular.Codigo = Convert.ToInt32(txtCodigo.Text);
-                auricular.FechaFabricacion = Convert.ToDateTime(dtpFF.Value); 
+                auricular.FechaFabricacion = Convert.ToDateTime(dtpFF.Value);
                 auricular.Precio = Convert.ToDecimal(txtCodigo.Text);
                 auricular.CantIngresar = Convert.ToInt32(nudCantIng.Value);
-                
 
-                dtStock.Rows.Add(new object[] { auricular.Marca, auricular.Caracteristicas, auricular.Codigo, auricular.FechaFabricacion, auricular.Precio, auricular.CantIngresar });
-                dtStock.WriteXml(DIRECCION_XML + "auricular.xml");
+                //nGrabados = objNegAuricular.abmAuriculares("Alta");
+
+
+                //dtStock.Rows.Add(new object[] { auricular.Marca, auricular.Caracteristicas, auricular.Codigo, auricular.FechaFabricacion, auricular.Precio, auricular.CantIngresar });
+                //dtStock.WriteXml(DIRECCION_XML + "auricular.xml");
 
                 txtCaract.Clear();
                 txtCodigo.Clear();
@@ -59,13 +93,13 @@ namespace Front
             }
         }
         //Metodo para leer el archivo xml
-        private void Leer_DT()
-        {
-            if (System.IO.File.Exists(DIRECCION_XML + "auricular.xml"))
-            {
-                dtStock.ReadXml(DIRECCION_XML + "auricular.xml");
-            }
-        }
+        //private void Leer_DT()
+        //{
+        //    if (System.IO.File.Exists(DIRECCION_XML + "auricular.xml"))
+        //    {
+        //        dtStock.ReadXml(DIRECCION_XML + "auricular.xml");
+        //    }
+        //}
         //Metodo para verificar que todos los campos esten llenos
         private bool Validar()
         {
@@ -117,15 +151,15 @@ namespace Front
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            if (dgvStock.CurrentRow == null)
-            {
-                MessageBox.Show("Seleccione una fila");
-            }
-            else
-            {
-                int i = dgvStock.CurrentRow.Index;
-                dtStock.Rows.RemoveAt(i);
-            }
+            //if (dgvStock.CurrentRow == null)
+            //{
+            //    MessageBox.Show("Seleccione una fila");
+            //}
+            //else
+            //{
+            //    int i = dgvStock.CurrentRow.Index;
+            //    dtStock.Rows.RemoveAt(i);
+            //}
 
         }
     }
