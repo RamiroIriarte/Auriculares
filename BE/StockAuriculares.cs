@@ -14,9 +14,10 @@ namespace Front
 {
     public partial class StockAuriculares : Form
     {
-        //Intanciamos un objeto de la clase Auricular, creamos el data table y el archivo xml
+        //Intanciamos un objeto de la clase Auricular
 
-        Auricular auricular = new Auricular();
+        Auricular nuevoAuricular;
+        Auricular AuriExistente;
         NegAuricular objNegAuricular = new NegAuricular();
         //DataTable dtStock = new DataTable() { TableName = "Stock" };
         //const string DIRECCION_XML = @"C:\Users\Ramiro\source\repos\Auriculares\";
@@ -26,7 +27,7 @@ namespace Front
             InitializeComponent();
             CrearDGV();
             LlenarDGV();
-            
+
             //Creamos las columnas del data table
             //dtStock.Columns.Add("Marca");
             //dtStock.Columns.Add("Caracteristicas");
@@ -65,19 +66,30 @@ namespace Front
             dgvStock.Columns.Add("5", "FechaFabricacion");
 
         }
-       private void btnCargar_Click(object sender, EventArgs e)
+        private void Vaciar_Todo()
+        {
+            txtCaract.Clear();
+            txtCodigo.Clear();
+            txtMarca.Clear();
+            txtPrecio.Clear();
+            nudCantIng.Value = 0;
+        }
+        private void btnCargar_Click(object sender, EventArgs e)
         {
             epvValidar.Clear();
 
-            if (!Validar())
+            if (!Validar(0))
             {
                 int nGrabados = -1;
-                auricular.Marca = txtMarca.Text;
-                auricular.Caracteristicas = txtCaract.Text;
-                auricular.Codigo = Convert.ToInt32(txtCodigo.Text);
-                auricular.FechaFabricacion = Convert.ToDateTime(dtpFF.Value);
-                auricular.Precio = Convert.ToDecimal(txtCodigo.Text);
-                auricular.CantIngresar = Convert.ToInt32(nudCantIng.Value);
+
+                nuevoAuricular = new Auricular(txtMarca.Text, txtCaract.Text, int.Parse(txtCodigo.Text), (int)nudCantIng.Value, decimal.Parse(txtPrecio.Text), dtpFF.Value);
+
+                nGrabados = objNegAuricular.abmAuriculares("Alta", nuevoAuricular);
+
+                if (nGrabados == -1)
+                {
+                    MessageBox.Show("No se pudo cargar el producto en el sistema");
+                }
 
                 //nGrabados = objNegAuricular.abmAuriculares("Alta");
 
@@ -85,11 +97,9 @@ namespace Front
                 //dtStock.Rows.Add(new object[] { auricular.Marca, auricular.Caracteristicas, auricular.Codigo, auricular.FechaFabricacion, auricular.Precio, auricular.CantIngresar });
                 //dtStock.WriteXml(DIRECCION_XML + "auricular.xml");
 
-                txtCaract.Clear();
-                txtCodigo.Clear();
-                txtMarca.Clear();
-                txtPrecio.Clear();
-                nudCantIng.Value = 0;
+                Vaciar_Todo();
+
+                LlenarDGV();
             }
         }
         //Metodo para leer el archivo xml
@@ -101,33 +111,44 @@ namespace Front
         //    }
         //}
         //Metodo para verificar que todos los campos esten llenos
-        private bool Validar()
+        private bool Validar(int boton)
         {
             bool validar = false;
-            if (txtMarca.Text == "")
+            if (boton == 0)
             {
-                epvValidar.SetError(txtMarca, "Llenar campo");
-                validar = true;
+                if (txtMarca.Text == "")
+                {
+                    epvValidar.SetError(txtMarca, "Llenar campo");
+                    validar = true;
+                }
+                if (txtCaract.Text == "")
+                {
+                    epvValidar.SetError(txtCaract, "Llenar campo");
+                    validar = true;
+                }
+                if (txtCodigo.Text == "")
+                {
+                    epvValidar.SetError(txtCodigo, "Llenar campo");
+                    validar = true;
+                }
+                if (txtPrecio.Text == "")
+                {
+                    epvValidar.SetError(txtPrecio, "Llenar campo");
+                    validar = true;
+                }
+                if (nudCantIng.Value == 0)
+                {
+                    epvValidar.SetError(nudCantIng, "Llenar campo");
+                    validar = true;
+                }
             }
-            if (txtCaract.Text == "")
+            if (boton == 1)
             {
-                epvValidar.SetError(txtCaract, "Llenar campo");
-                validar = true;
-            }
-            if (txtCodigo.Text == "")
-            {
-                epvValidar.SetError(txtCodigo, "Llenar campo");
-                validar = true;
-            }
-            if (txtPrecio.Text == "")
-            {
-                epvValidar.SetError(txtPrecio, "Llenar campo");
-                validar = true;
-            }
-            if (nudCantIng.Value == 0)
-            {
-                epvValidar.SetError(nudCantIng, "Llenar campo");
-                validar = true;
+                if (txtBorrar.Text == "")
+                {
+                    epvValidar.SetError(txtBorrar, "Llenar campo");
+                    validar = true;
+                }
             }
             return validar;
 
@@ -151,16 +172,46 @@ namespace Front
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            //if (dgvStock.CurrentRow == null)
-            //{
-            //    MessageBox.Show("Seleccione una fila");
-            //}
-            //else
-            //{
-            //    int i = dgvStock.CurrentRow.Index;
-            //    dtStock.Rows.RemoveAt(i);
-            //}
+            if (!Validar(1))
+            {
+                DialogResult resultado = MessageBox.Show("¿Está seguro que desea eliminar el celular de codigo " + txtCodigo.Text + "?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (resultado == DialogResult.Yes)
+                {
+                    int nGrabados = -1;
+                    nuevoAuricular = new Auricular(int.Parse(txtBorrar.Text));
+                    nGrabados = objNegAuricular.abmAuriculares("Baja", nuevoAuricular);
+                    LlenarDGV();
 
+
+                }
+            }
+            
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            epvValidar.Clear();
+
+            if (!Validar(0))
+            {
+                int nResultado = -1;
+                nuevoAuricular = new Auricular(txtMarca.Text, txtCaract.Text, int.Parse(txtCodigo.Text), (int)nudCantIng.Value, decimal.Parse(txtPrecio.Text), dtpFF.Value);
+
+                nResultado = objNegAuricular.abmAuriculares("Modificar", nuevoAuricular); //invoco a la capa de negocio
+
+                if (nResultado != -1)
+                {
+                    MessageBox.Show("El celular fue Modificado con éxito", "Aviso");
+                    Vaciar_Todo();
+                    LlenarDGV();
+
+                    txtCodigo.Enabled = true;
+
+                }
+                else
+                    MessageBox.Show("Se produjo un error al intentar modificar el celular", "Error");
+            }
+               
         }
     }
 }

@@ -17,15 +17,18 @@ namespace CapaDatos
             string orden = string.Empty;
 
             if (accion == "Alta")
-                orden = "insert into Auriculares values ('" + objAuricular.Marca + "','" + objAuricular.Caracteristicas + "'," + objAuricular.Codigo + "," + objAuricular.CantIngresar + "," + objAuricular.Precio + "," + objAuricular.FechaFabricacion + ");";
-
-            if (accion == "Modificar")
-                orden = "update Auriculares set Marca='" + objAuricular.Marca + "', Caracteristicas='" + objAuricular.Caracteristicas + "', Cantidad=" + objAuricular.Marca + ", Precio=" + objAuricular.Marca + ", FechaFabricacion=" + objAuricular.FechaFabricacion + "  where Codigo=" + objAuricular.Codigo + ";";
+              
+                orden = $"insert into Auriculares (Marca,Caracteristicas,Codigo,Cantidad,Precio,FechaFabricacion) values ('{objAuricular.Marca}', '{objAuricular.Caracteristicas}', {objAuricular.Codigo}, {objAuricular.CantIngresar}, {objAuricular.Precio} , '{objAuricular.FechaFabricacion}' );";
             
-            //if (accion == "Baja")
-            //    orden = "delete from Auriculares  where Codigo=" + objAuricular.Codigo + ";";
-            // falta la orden de borrar 
-            OleDbCommand cmd = new OleDbCommand(orden, conexion);
+            if (accion == "Modificar")
+              
+                orden = $"update Auriculares set Marca='{objAuricular.Marca}', Caracteristicas='{objAuricular.Caracteristicas}', Cantidad={objAuricular.CantIngresar}, Precio={objAuricular.Precio}, FechaFabricacion='{objAuricular.FechaFabricacion}' WHERE Codigo Like '%{objAuricular.Codigo}%';";
+         
+            if (accion == "Baja")
+            
+                orden = "delete from Auriculares  where Codigo=" + objAuricular.Codigo + ";";
+          
+           OleDbCommand cmd = new OleDbCommand(orden, conexion);
 
             try
             {
@@ -34,7 +37,7 @@ namespace CapaDatos
             }
             catch (Exception e)
             {
-                throw new Exception("Errror al tratar de guardar,borrar o modificar de  Profesionales", e);
+                throw new Exception("Errror al tratar de guardar,borrar o modificar algun auricular", e);
             }
             finally
             {
@@ -47,9 +50,9 @@ namespace CapaDatos
         {
             string orden = string.Empty;
             if (cual != "Todos")
-                orden = "select * from Auricular where Codigo = " + int.Parse(cual) + ";";
+                orden = "select * from Auriculares where Codigo = " + int.Parse(cual) + ";";
             else
-                orden = "select * from Auricular;";
+                orden = "select * from Auriculares;";
 
             OleDbCommand cmd = new OleDbCommand(orden, conexion);
             DataSet ds = new DataSet();

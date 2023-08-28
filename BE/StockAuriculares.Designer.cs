@@ -45,6 +45,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.epvValidar = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnBorrar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.txtBorrar = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantIng)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epvValidar)).BeginInit();
@@ -53,16 +56,16 @@
             // dgvStock
             // 
             this.dgvStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStock.Location = new System.Drawing.Point(280, 25);
+            this.dgvStock.Location = new System.Drawing.Point(27, 196);
             this.dgvStock.Name = "dgvStock";
-            this.dgvStock.Size = new System.Drawing.Size(664, 306);
+            this.dgvStock.Size = new System.Drawing.Size(523, 151);
             this.dgvStock.TabIndex = 10;
             // 
             // dtpFF
             // 
-            this.dtpFF.Location = new System.Drawing.Point(27, 163);
+            this.dtpFF.Location = new System.Drawing.Point(27, 120);
             this.dtpFF.Name = "dtpFF";
-            this.dtpFF.Size = new System.Drawing.Size(200, 20);
+            this.dtpFF.Size = new System.Drawing.Size(196, 20);
             this.dtpFF.TabIndex = 0;
             // 
             // label1
@@ -77,7 +80,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 195);
+            this.label2.Location = new System.Drawing.Point(240, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 2;
@@ -95,7 +98,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 99);
+            this.label4.Location = new System.Drawing.Point(240, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 4;
@@ -104,7 +107,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(24, 245);
+            this.label5.Location = new System.Drawing.Point(240, 104);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(99, 13);
             this.label5.TabIndex = 5;
@@ -115,23 +118,23 @@
             this.txtCaract.Location = new System.Drawing.Point(27, 70);
             this.txtCaract.Multiline = true;
             this.txtCaract.Name = "txtCaract";
-            this.txtCaract.Size = new System.Drawing.Size(173, 20);
+            this.txtCaract.Size = new System.Drawing.Size(147, 20);
             this.txtCaract.TabIndex = 6;
             // 
             // txtCodigo
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(27, 115);
+            this.txtCodigo.Location = new System.Drawing.Point(243, 25);
             this.txtCodigo.MaxLength = 5;
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(100, 20);
+            this.txtCodigo.Size = new System.Drawing.Size(117, 20);
             this.txtCodigo.TabIndex = 7;
             this.txtCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigo_KeyPress);
             // 
             // txtPrecio
             // 
-            this.txtPrecio.Location = new System.Drawing.Point(27, 211);
+            this.txtPrecio.Location = new System.Drawing.Point(243, 70);
             this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new System.Drawing.Size(100, 20);
+            this.txtPrecio.Size = new System.Drawing.Size(117, 20);
             this.txtPrecio.TabIndex = 8;
             this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             // 
@@ -139,12 +142,12 @@
             // 
             this.txtMarca.Location = new System.Drawing.Point(27, 25);
             this.txtMarca.Name = "txtMarca";
-            this.txtMarca.Size = new System.Drawing.Size(100, 20);
+            this.txtMarca.Size = new System.Drawing.Size(147, 20);
             this.txtMarca.TabIndex = 9;
             // 
             // btnCargar
             // 
-            this.btnCargar.Location = new System.Drawing.Point(27, 308);
+            this.btnCargar.Location = new System.Drawing.Point(27, 156);
             this.btnCargar.Name = "btnCargar";
             this.btnCargar.Size = new System.Drawing.Size(107, 23);
             this.btnCargar.TabIndex = 11;
@@ -154,7 +157,7 @@
             // 
             // nudCantIng
             // 
-            this.nudCantIng.Location = new System.Drawing.Point(27, 261);
+            this.nudCantIng.Location = new System.Drawing.Point(243, 120);
             this.nudCantIng.Name = "nudCantIng";
             this.nudCantIng.Size = new System.Drawing.Size(120, 20);
             this.nudCantIng.TabIndex = 12;
@@ -162,7 +165,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(24, 147);
+            this.label6.Location = new System.Drawing.Point(24, 104);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(110, 13);
             this.label6.TabIndex = 13;
@@ -174,7 +177,7 @@
             // 
             // btnBorrar
             // 
-            this.btnBorrar.Location = new System.Drawing.Point(140, 308);
+            this.btnBorrar.Location = new System.Drawing.Point(409, 156);
             this.btnBorrar.Name = "btnBorrar";
             this.btnBorrar.Size = new System.Drawing.Size(109, 23);
             this.btnBorrar.TabIndex = 14;
@@ -182,11 +185,40 @@
             this.btnBorrar.UseVisualStyleBackColor = true;
             this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
             // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(140, 156);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(109, 23);
+            this.btnModificar.TabIndex = 15;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // txtBorrar
+            // 
+            this.txtBorrar.Location = new System.Drawing.Point(397, 119);
+            this.txtBorrar.Name = "txtBorrar";
+            this.txtBorrar.Size = new System.Drawing.Size(136, 20);
+            this.txtBorrar.TabIndex = 16;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(424, 104);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(80, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Codigo a Borrar";
+            // 
             // StockAuriculares
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(956, 350);
+            this.ClientSize = new System.Drawing.Size(555, 350);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtBorrar);
+            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnBorrar);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnCargar);
@@ -229,6 +261,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ErrorProvider epvValidar;
         private System.Windows.Forms.Button btnBorrar;
+        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.TextBox txtBorrar;
+        private System.Windows.Forms.Label label7;
     }
 }
 
